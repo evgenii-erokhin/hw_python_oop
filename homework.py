@@ -1,20 +1,21 @@
 from typing import Type, List, Dict
+from dataclasses import dataclass
 
 
+@dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
-    def __init__(self, training_type, duration, distance, speed, calories):
-        self.training_type = training_type
-        self.duration = duration
-        self.get_distance = distance
-        self.get_mean_speed = speed
-        self.calories = calories
+    training_type: str
+    duration: float
+    distance: float
+    speed: float
+    calories: float
 
     def get_message(self) -> str:
         return (f'Тип тренировки: {self.training_type}; '
                 f'Длительность: {self.duration:.3f} ч.; '
-                f'Дистанция: {self.get_distance:.3f} км; '
-                f'Ср. скорость: {self.get_mean_speed:.3f} км/ч; '
+                f'Дистанция: {self.distance:.3f} км; '
+                f'Ср. скорость: {self.speed:.3f} км/ч; '
                 f'Потрачено ккал: {self.calories:.3f}.')
 
 
@@ -127,8 +128,8 @@ def read_package(workout_type: str, data: List[int]) -> Training:
     }
     if workout_type not in training_type:
         raise ValueError(f'Не известный тип тренировки "{workout_type}"')
-    else:
-        return training_type[workout_type](*data)
+        # Видел что работает без else но не разобрался правильно ли так
+    return training_type[workout_type](*data)
 
 
 def main(training: Training) -> None:
