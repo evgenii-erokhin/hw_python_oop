@@ -125,11 +125,10 @@ def read_package(workout_type: str, data: List[int]) -> Training:
         'RUN': Running,
         'WLK': SportsWalking
     }
-    if workout_type in training_type:
-        try:
-            return training_type[workout_type](*data)
-        except KeyError:
-            raise KeyError('Нет такого вида тренировки! Попробуйте еще раз')
+    if workout_type not in training_type:
+        raise ValueError(f'Не известный тип тренировки "{workout_type}"')
+    else:
+        return training_type[workout_type](*data)
 
 
 def main(training: Training) -> None:
