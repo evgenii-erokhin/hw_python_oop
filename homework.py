@@ -130,7 +130,6 @@ def read_package(workout_type: str, data: List[int]) -> Training:
     }
     if workout_type not in training_type:
         raise ValueError(f'Не известный тип тренировки "{workout_type}"')
-        # Видел что работает без else но не разобрался правильно ли так
     return training_type[workout_type](*data)
 
 
